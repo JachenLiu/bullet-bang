@@ -14,10 +14,10 @@ namespace Bang
 
         public abstract void Add(Card card);
         public abstract void Remove(Card card);
-        public List<Card> Append(Pile pile)
+        public List<Card> AddRange(Pile pile)
         {
-            //todo
-            return pile.Deck;
+            Deck.AddRange(pile.Deck);
+            return Deck;
         }
         public void Shuffle()
         {
