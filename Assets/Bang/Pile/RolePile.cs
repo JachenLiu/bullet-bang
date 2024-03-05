@@ -5,67 +5,38 @@ using UnityEngine;
 
 namespace Bang
 {
-    public class RolePile : Pile
+    public class RolePile : Pile<RoleCard>
     {
-        private List<UnplayableCard> Roles = new List<UnplayableCard>();
+        protected override List<RoleCard> Deck { get; set; }
 
-        public List<UnplayableCard> GetPile()
+        public RolePile()
         {
-            return Roles;
-        }
-        //public RolePile InitializeRoles(int numPlayers)
-        //{
-
-        //    Sheriff sheriff = new Sheriff();
-        //    Deputy deputy = new Deputy();
-        //    Renegade renegade = new Renegade();
-        //    Outlaw outlaw = new Outlaw();
-
-        //    switch (numPlayers)
-        //    {
-        //        case 3:
-        //            Roles.Add(deputy);
-        //            Roles.Add(renegade);
-        //            Roles.Add(outlaw);
-        //            break;
-        //        case 8:
-        //            Roles.Add(renegade);
-        //            goto case 7;
-        //        case 7:
-        //            Roles.Add(deputy);
-        //            goto case 6;
-        //        case 6:
-        //            Roles.Add(outlaw);
-        //            goto case 5;
-        //        case 5:
-        //            Roles.Add(deputy);
-        //            goto case 4;
-        //        case 4:
-        //            Roles.Add(sheriff);
-        //            Roles.Add(renegade);
-        //            Roles.Add(outlaw);
-        //            Roles.Add(outlaw); // Assuming you want two outlaws in a 4-player game
-        //            break;
-        //    }
-            
-        //    return this;
-        //}
-
-        public override void Add(Card card)
-        {
-            Roles.Add((UnplayableCard) card);
+            Deck = new List<RoleCard>();
         }
 
-        public override void Remove(Card card)
+        public override void Add(RoleCard card)
         {
-            Roles.Remove((UnplayableCard) card);
+            if(card == null)
+            {
+                Debug.LogError("tried to add non role card to role pile");
+            }
+            else
+            {
+                Deck.Add(card);
+
+            }
         }
-        //public void print()
-        //{
-        //    foreach (rolecard c in roles)
-        //    {
-        //        debug.log(c.getrole());
-        //    }
-        //}
+
+        public override void Remove(RoleCard card)
+        {
+            if (card == null)
+            {
+                Debug.LogError("tried to remove non role card to role pile");
+            }
+            else
+            {
+                Deck.Remove(card);
+            }
+        }
     }
 }

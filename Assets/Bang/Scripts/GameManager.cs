@@ -13,41 +13,75 @@ namespace Bang
 {
     public class GameManager : MonoBehaviour
     {
-        //CardDatabase Deck = new CardDatabase();
-        //private GameServer Server;
-        //private GameClient Client;
-        //GameState gameState;
-        public Transform globalBlack;
-        public CameraManager cameraManager;
-        public string gameVersion = "0.0.0";
-        public bool gameIsOnFocus = true;
-        public static GameManager Instance { get; private set; }
-        private void OnApplicationFocus(bool hasFocus)
+        
+        private static GameManager instance;
+        public static GameManager Instance
         {
-            this.gameIsOnFocus = hasFocus;
+            get
+            {
+                if(instance == null)
+                {
+                    instance = FindObjectOfType<GameManager>();
+                }
+                return instance;
+            }
         }
         private void Awake()
         {
-            if ((UnityEngine.Object)GameManager.Instance == (UnityEngine.Object)null)
-                GameManager.Instance = this;
-            else if ((UnityEngine.Object)GameManager.Instance != (UnityEngine.Object)this)
-                UnityEngine.Object.Destroy((UnityEngine.Object)this.gameObject);
+            if (instance == null)
+            {
+                instance = this;
+            }
+            else if (instance != this)
+            {
+                Destroy(gameObject);
+                return;
+            }
+            DontDestroyOnLoad(gameObject);
+        }
 
-            this.globalBlack.gameObject.SetActive(true);
-            CultureInfo.DefaultThreadCurrentUICulture = CultureInfo.DefaultThreadCurrentUICulture = new CultureInfo("en-US", false);
-        }
-        private void Start()
-        {
-            //Application.targetFrameRate = Globals.Instance.NormalFPS;
-            this.gameVersion = ((TextAsset)UnityEngine.Resources.Load("runtime-version")).text;
-            this.SetCamera();
-            //this.Resize();
-            //Globals.Instance.CreateGameContent();
-        }
+        private int playerCountInput = 7;
+        private CardManager cardManager;
+        private CardDatabase cardDatabase;
+
         public void StartGame()
         {
             Debug.Log("Game started");
+            //add cardmanager
+            if(cardManager == null)
+            {
 
+                cardManager = gameObject.AddComponent<CardManager>();
+
+            }
+            else
+            {
+                Debug.LogWarning("Cardmanager already attached");
+            }
+            //Generate cards
+            cardDatabase = new CardDatabase();
+
+            //Set playercount
+            cardDatabase.SetPlayerCount(playerCountInput);
+            Debug.LogWarning("playercount is set to" + playerCountInput);
+          
+            //Set rolepile
+            RolePile roles = cardDatabase.GetAvailableRoles();
+            if(roles == null)
+            {
+                Debug.LogWarning("null rolls");
+
+            }
+            roles.Print();
+            //set characters
+            //CharacterPile characters = cardDatabase.GetDefaultCharacterPile();
+            
+
+            /*
+             * initialize game state
+             * set up players
+             * spawn cards
+             */
             //Server = new GameServer();
             //gameState = new GameState();
 
@@ -59,38 +93,11 @@ namespace Bang
             //Create Game Clients
 
         }
-        public void SetCamera()
+        public CardDatabase GetCardDatabase()
         {
-            Camera[] allCameras = Camera.allCameras;
-
-            for (int index = 0; index < allCameras.Length; ++index)
-            {
-                if (allCameras[index].gameObject.tag != "MainCamera")
-                {
-                    allCameras[index].gameObject.SetActive(false);
-                }
-                else
-                {
-                    this.cameraManager = allCameras[index].GetComponent<CameraManager>();
-                    //this.cameraMain = allCameras[index];
-                }
-            }
+            return cardDatabase;
         }
-
-        public void SendServerEventToClients(/* event */)
-        {
-
-        }
-
-        public void SendClientEventToServer(/* event */)
-        {
-
-        }
-        public void ResetGameState()
-        {
-
-        }
-       
+        
 
     }
 }

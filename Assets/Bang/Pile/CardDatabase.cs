@@ -9,8 +9,15 @@ namespace Bang
     //defines existing cards into game
     public class CardDatabase
     {
-        private RolePile Roles;
+        private int playerCount;
+        private RolePile roles;
 
+
+        public void SetPlayerCount(int numPlayers)
+        {
+            playerCount = numPlayers;
+            Debug.LogWarning("yes it is set to " + playerCount);
+        }
         //private Pile<UnplayableCard> DefaultCharacters;
         //private Pile<UnplayableCard> DodgeCityCharacters;
         //private Pile<UnplayableCard> SpecialCharacters;
@@ -24,100 +31,114 @@ namespace Bang
         public CardDatabase()
         {
             GenerateDatabase();
+            Debug.LogWarning("Database Generated");
         }
-
         public void GenerateDatabase()
         {
+            SetPlayerCount(playerCount);
             InitializeRoles();
-            //InitializeDefaultCharacters();
+            InitializeDefaultCharacters();
             //InitializeDodgeCityCharacters();
             //InitializeSpecialCharacters();
             //InitializeDefaultGameCards();
             //InitializeDodgeCityCards();
         }
-        private void SetPlayerCountForRoles(int numPlayers)
+        private void InitializeRoles()
         {
-            Roles = GetAvailableRoles(numPlayers);
-        }
-        private RolePile GetAvailableRoles(int numPlayers)
-        {
+            roles = new RolePile();
+            int numPlayers = playerCount;
+            Debug.LogWarning("playercount" + numPlayers);
+
             Sheriff sheriff = new Sheriff();
             Deputy deputy = new Deputy();
             Renegade renegade = new Renegade();
             Outlaw outlaw = new Outlaw();
-            
-            switch (numPlayers)
+            switch (playerCount)
             {
                 case 3:
-                    Roles.Add(deputy);
-                    Roles.Add(renegade);
-                    Roles.Add(outlaw);
+                    roles.Add(deputy);
+                    roles.Add(renegade);
+                    roles.Add(outlaw);
                     break;
                 case 8:
-                    Roles.Add(renegade);
+                    roles.Add(renegade);
                     goto case 7;
                 case 7:
-                    Roles.Add(deputy);
+                    roles.Add(deputy);
                     goto case 6;
                 case 6:
-                    Roles.Add(outlaw);
+                    roles.Add(outlaw);
                     goto case 5;
                 case 5:
-                    Roles.Add(deputy);
+                    roles.Add(deputy);
                     goto case 4;
                 case 4:
-                    Roles.Add(sheriff);
-                    Roles.Add(renegade);
-                    Roles.Add(outlaw);
-                    Roles.Add(outlaw); // Assuming you want two outlaws in a 4-player game
+                    roles.Add(sheriff);
+                    roles.Add(renegade);
+                    roles.Add(outlaw);
+                    roles.Add(outlaw); // Assuming you want two outlaws in a 4-player game
                     break;
             }
-            return Roles;
+            if (roles == null)
+            {
+                Debug.LogWarning("null getavailableroles");
+            }
+            Debug.LogWarning("roles are initialized");
+            roles.Print();
         }
-        private void InitializeRoles()
+        public RolePile GetAvailableRoles()
         {
-            SetPlayerCountForRoles(8/*pass in*/);
+            Debug.LogWarning("HEY");
+            return roles;
         }
 
-        //private void InitializeDefaultCharacters()
-        //{
-        //    //Default Characters
-        //    DefaultCharacters = new Pile<UnplayableCard>();
 
-        //    Cassidy CASSIDY = new Cassidy();
-        //    Jack JACK = new Jack();
-        //    Janet JANET = new Janet();
-        //    Gringo GRINGO = new Gringo();
-        //    Jones JONES = new Jones();
-        //    Jourdonnais JOURDONNAIS = new Jourdonnais();
-        //    Carlson CARLSON = new Carlson();
-        //    Duke DUKE = new Duke();
-        //    Regret REGRET = new Regret();
-        //    Ramirez RAMIREZ = new Ramirez();
-        //    Doolan DOOLAN = new Doolan();
-        //    Ketchum KETCHUM = new Ketchum();
-        //    Killer KILLER = new Killer();
-        //    Lafayette LAFAYETTE = new Lafayette();
-        //    Sam SAM = new Sam();
-        //    Willy WILLY = new Willy();
+        private void InitializeDefaultCharacters()
+        {
+            //Default Characters
+            GetDefaultCharacterPile();
+        }
 
-        //    DefaultCharacters.Add(CASSIDY);
-        //    DefaultCharacters.Add(JACK);
-        //    DefaultCharacters.Add(JANET);
-        //    DefaultCharacters.Add(GRINGO);
-        //    DefaultCharacters.Add(JONES);
-        //    DefaultCharacters.Add(JOURDONNAIS);
-        //    DefaultCharacters.Add(CARLSON);
-        //    DefaultCharacters.Add(DUKE);
-        //    DefaultCharacters.Add(REGRET);
-        //    DefaultCharacters.Add(RAMIREZ);
-        //    DefaultCharacters.Add(DOOLAN);
-        //    DefaultCharacters.Add(KETCHUM);
-        //    DefaultCharacters.Add(KILLER);
-        //    DefaultCharacters.Add(LAFAYETTE);
-        //    DefaultCharacters.Add(SAM);
-        //    DefaultCharacters.Add(WILLY);
-        //}
+        public CharacterPile GetDefaultCharacterPile()
+        {
+            CharacterPile DefaultCharacters = new CharacterPile();
+
+            Cassidy CASSIDY = new Cassidy();
+            Jack JACK = new Jack();
+            Janet JANET = new Janet();
+            Gringo GRINGO = new Gringo();
+            Jones JONES = new Jones();
+            Jourdonnais JOURDONNAIS = new Jourdonnais();
+            Carlson CARLSON = new Carlson();
+            Duke DUKE = new Duke();
+            Regret REGRET = new Regret();
+            Ramirez RAMIREZ = new Ramirez();
+            Doolan DOOLAN = new Doolan();
+            Ketchum KETCHUM = new Ketchum();
+            Killer KILLER = new Killer();
+            Lafayette LAFAYETTE = new Lafayette();
+            Sam SAM = new Sam();
+            Willy WILLY = new Willy();
+
+            DefaultCharacters.Add(CASSIDY);
+            DefaultCharacters.Add(JACK);
+            DefaultCharacters.Add(JANET);
+            DefaultCharacters.Add(GRINGO);
+            DefaultCharacters.Add(JONES);
+            DefaultCharacters.Add(JOURDONNAIS);
+            DefaultCharacters.Add(CARLSON);
+            DefaultCharacters.Add(DUKE);
+            DefaultCharacters.Add(REGRET);
+            DefaultCharacters.Add(RAMIREZ);
+            DefaultCharacters.Add(DOOLAN);
+            DefaultCharacters.Add(KETCHUM);
+            DefaultCharacters.Add(KILLER);
+            DefaultCharacters.Add(LAFAYETTE);
+            DefaultCharacters.Add(SAM);
+            DefaultCharacters.Add(WILLY);
+
+            return DefaultCharacters;
+        }
 
         //private void InitializeDodgeCityCharacters()
         //{

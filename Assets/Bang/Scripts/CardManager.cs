@@ -10,19 +10,21 @@ namespace Bang
 
         private void Awake()
         {
-            InstantiateCards();
+            //InstantiateCards();
         }
         private void Start()
         {
-            
+
         }
         private void InstantiateCards()
         {
-            InstantiateRoles();
+            Debug.LogWarning("Instantiate Cards");
+            //InstantiateRoles();
+            //todo other cards
         }
         private void InstantiateRoles()
         {
-
+            RolePile availableRoles = cardDatabase.GetAvailableRoles();
         }
 
     }
