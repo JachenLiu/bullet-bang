@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Bang
 {
-    public class Player
+    public class Player : UnplayableCard
     {
         private int ID;
         private string name;

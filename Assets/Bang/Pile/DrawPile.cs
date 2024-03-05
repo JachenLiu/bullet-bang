@@ -3,23 +3,42 @@ using System.Collections.Generic;
 using UnityEngine;
 
 using Bang;
+
 namespace Bang
 {
-    public class DrawPile
+    public class DrawPile : Pile<PlayableCard>
     {
-        private List<PlayableCard> Draw = new List<PlayableCard>();
+        protected override List<PlayableCard> Deck { get; set; }
 
-        public List<PlayableCard> getPile()
+        public DrawPile()
         {
-            return Draw;
+            Deck = new List<PlayableCard>();
+
         }
-        public void add(PlayableCard card)
+
+        public override void Add(PlayableCard card)
         {
-            Draw.Add(card);
+            if (card == null)
+            {
+                Debug.LogError("tried to add non playable card to draw pile");
+            }
+            else
+            {
+                Deck.Add(card);
+
+            }
         }
-        public void remove(PlayableCard card)
+
+        public override void Remove(PlayableCard card)
         {
-            Draw.Remove(card);
+            if (card == null)
+            {
+                Debug.LogError("tried to remove non playable card to draw pile");
+            }
+            else
+            {
+                Deck.Remove(card);
+            }
         }
     }
 }

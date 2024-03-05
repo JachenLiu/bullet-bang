@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Bang;
 
-namespace Bang.DodgeCity
+namespace Bang
 {
 	public abstract class DodgeCityCard : NormalCard
 	{

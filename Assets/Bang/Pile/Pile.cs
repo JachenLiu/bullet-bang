@@ -15,6 +15,15 @@ namespace Bang
             Deck.AddRange(pile.Deck);
             return Deck;
         }
+        public T GetCard(int index)
+        {
+            return Deck[index];
+        }
+        public void SetCard(T card, int index)
+        {
+            Deck[index] = card;
+        }
+
         public void Shuffle()
         {
             int n = Deck.Count;
@@ -36,9 +45,9 @@ namespace Bang
             else
             {
                 Debug.LogWarning("trying to print");
+                Debug.LogWarning(Deck.ToString()+ Deck.Count);
                 foreach (T c in Deck)
                 {
-                    Debug.LogWarning("help" + c);
                     if (c is RoleCard roleCard)
                     {
                         Debug.LogWarning("Role" + roleCard.GetRole());
@@ -46,6 +55,14 @@ namespace Bang
                     if (c is CharacterCard characterCard)
                     {
                         Debug.LogWarning("character" + characterCard.GetName());
+                    }
+                    if (c is PlayerCard playerCard)
+                    {
+                        Debug.LogWarning("player " + playerCard.GetPlayerRole());
+                    }
+                    if (c is PlayableCard playableCard)
+                    {
+                        Debug.LogWarning("playable card is " + playableCard.ToString());
                     }
                 }
             }

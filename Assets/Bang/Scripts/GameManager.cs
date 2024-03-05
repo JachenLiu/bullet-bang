@@ -58,24 +58,29 @@ namespace Bang
             {
                 Debug.LogWarning("Cardmanager already attached");
             }
-            //Generate cards
-            cardDatabase = new CardDatabase();
-
-            //Set playercount
-            cardDatabase.SetPlayerCount(playerCountInput);
-            Debug.LogWarning("playercount is set to" + playerCountInput);
+            //Generate cards based off playercount
+            cardDatabase = new CardDatabase(playerCountInput);
           
             //Set rolepile
             RolePile roles = cardDatabase.GetAvailableRoles();
             if(roles == null)
             {
-                Debug.LogWarning("null rolls");
+                Debug.LogWarning("null roles");
 
             }
             roles.Print();
             //set characters
-            //CharacterPile characters = cardDatabase.GetDefaultCharacterPile();
-            
+            CharacterPile characters = cardDatabase.GetDefaultCharacterPile();
+            characters.Print();
+
+            //creates list of players to do implement multiplayers
+            PlayerPile players = cardDatabase.GetPlayers();
+            players.Print();
+
+            //create deck with playable cards
+            DrawPile draw = cardDatabase.GetDefaultGameCards();
+            draw.Shuffle();
+            draw.Print();
 
             /*
              * initialize game state
@@ -93,11 +98,7 @@ namespace Bang
             //Create Game Clients
 
         }
-        public CardDatabase GetCardDatabase()
-        {
-            return cardDatabase;
-        }
-        
+
 
     }
 }

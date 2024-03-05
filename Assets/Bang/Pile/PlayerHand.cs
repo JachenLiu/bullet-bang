@@ -5,22 +5,26 @@ using UnityEngine;
 using Bang;
 namespace Bang
 {
-    public class PlayerHand
+    public class PlayerHand : Pile<PlayableCard>
     {
-        private List<PlayableCard> Hand = new List<PlayableCard>();
+        protected override List<PlayableCard> Deck { get; set; }
 
+        public PlayerHand()
+        {
+            Deck = new List<PlayableCard>();
+        }
         public List<PlayableCard> getPile()
         {
-            return Hand;
+            return Deck;
         }
 
-        public void add(PlayableCard card)
+        public override void Add(PlayableCard card)
         {
-            Hand.Add(card);
+            Deck.Add(card);
         }
-        public void remove(PlayableCard card)
+        public override void Remove(PlayableCard card)
         {
-            Hand.Remove(card);
+            Deck.Remove(card);
         }
 
     }
