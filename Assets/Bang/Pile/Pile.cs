@@ -36,6 +36,22 @@ namespace Bang
                 Deck[n] = c;
             }
         }
+        public T Draw()
+        {
+            if(Deck.Count == 0)
+            {
+                Debug.LogError("Deck is empty");
+                return default(T);
+            }
+            T drawnCard = Deck[0];
+            Deck.RemoveAt(0);
+
+            return drawnCard;
+        }
+        public IEnumerator<T> GetEnumerator()
+        {
+            return Deck.GetEnumerator();
+        }
         public void Print()
         {
             if (Deck == null)
@@ -44,25 +60,24 @@ namespace Bang
             }
             else
             {
-                Debug.LogWarning("trying to print");
-                Debug.LogWarning(Deck.ToString()+ Deck.Count);
+                Debug.LogWarning("trying to print " + Deck.ToString() + " of size " + Deck.Count);
                 foreach (T c in Deck)
                 {
                     if (c is RoleCard roleCard)
                     {
-                        Debug.LogWarning("Role" + roleCard.GetRole());
+                        Debug.LogWarning("Role is" + roleCard.GetRole());
                     }
                     if (c is CharacterCard characterCard)
                     {
-                        Debug.LogWarning("character" + characterCard.GetName());
+                        Debug.LogWarning("Character is " + characterCard.GetName());
                     }
                     if (c is PlayerCard playerCard)
                     {
-                        Debug.LogWarning("player " + playerCard.GetPlayerRole());
+                        Debug.LogWarning("Player is a" + playerCard.GetPlayerRole());
                     }
-                    if (c is PlayableCard playableCard)
+                    if (c is NormalCard normalCard)
                     {
-                        Debug.LogWarning("playable card is " + playableCard.ToString());
+                        Debug.LogWarning("Normal card is " + normalCard.ToString());
                     }
                 }
             }

@@ -5,7 +5,7 @@ using Bang;
 
 namespace Bang
 {
-    public abstract class CharacterCard : UnplayableCard
+    public abstract class CharacterCard : PlayableCard
     {
 		private string characterName;
 		private string characterDescription;
@@ -35,6 +35,10 @@ namespace Bang
 		{
 			characterDescription = description;
 		}
+		public override void UseCard()
+        {
+
+        }
 	}
 }
 

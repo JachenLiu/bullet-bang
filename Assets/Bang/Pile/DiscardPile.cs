@@ -3,23 +3,42 @@ using System.Collections.Generic;
 using UnityEngine;
 
 using Bang;
+
 namespace Bang
 {
-    public class DiscardPile
+    public class DiscardPile : Pile<PlayableCard>
     {
-        private List<PlayableCard> Discard = new List<PlayableCard>();
+        protected override List<PlayableCard> Deck { get; set; }
 
-        public List<PlayableCard> getPile()
+        public DiscardPile()
         {
-            return Discard;
+            Deck = new List<PlayableCard>();
+
         }
-        public void add(PlayableCard card)
+
+        public override void Add(PlayableCard card)
         {
-            Discard.Add(card);
+            if (card == null)
+            {
+                Debug.LogError("tried to add non playable card to discard pile");
+            }
+            else
+            {
+                Deck.Add(card);
+
+            }
         }
-        public void remove(PlayableCard card)
+
+        public override void Remove(PlayableCard card)
         {
-            Discard.Remove(card);
+            if (card == null)
+            {
+                Debug.LogError("tried to remove non playable card to discard pile");
+            }
+            else
+            {
+                Deck.Remove(card);
+            }
         }
     }
 }

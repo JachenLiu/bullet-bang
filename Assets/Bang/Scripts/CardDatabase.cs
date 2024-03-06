@@ -23,7 +23,6 @@ namespace Bang
         public void SetPlayerCount(int numPlayers)
         {
             playerCount = numPlayers;
-            Debug.LogWarning("playercount set to " + playerCount);
         }
         public int GetPlayerCount()
         {
@@ -36,7 +35,7 @@ namespace Bang
         {
             SetPlayerCount(numPlayers);
             GenerateDatabase();
-            Debug.LogWarning("Database Generated");
+            Debug.Log("Database Generated");
         }
         public void GenerateDatabase()
         {
@@ -53,7 +52,7 @@ namespace Bang
         {
             roles = new RolePile();
             int numPlayers = playerCount;
-            Debug.LogWarning("playercount" + numPlayers);
+            //Debug.LogWarning("playercount" + numPlayers);
 
             Sheriff sheriff = new Sheriff();
             Deputy deputy = new Deputy();
