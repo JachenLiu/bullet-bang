@@ -7,11 +7,11 @@ namespace Bang
     public class TurnManager
     {
         private PlayerPile players;
-        private int currentPlayerIndex;
+        //private int currentPlayerIndex;
         public TurnManager(PlayerPile players)
         {
             this.players = players;
-            this.currentPlayerIndex = 0; //first player is current - change to sheriff
+            //this.currentPlayerIndex = 0; //first player is current - change to sheriff
         }
 
         public void EndTurn()

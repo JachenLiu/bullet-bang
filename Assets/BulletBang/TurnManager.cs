@@ -6,7 +6,7 @@ namespace BulletBang
 {
     public class TurnManager : MonoBehaviour
     {
-        private int currentPlayerIndex = 0;
+        //private int currentPlayerIndex = 0;
         private List<Player> players;
         public void Initialize(List<Player> players)
         {

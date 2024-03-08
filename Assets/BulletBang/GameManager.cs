@@ -26,6 +26,7 @@ namespace BulletBang
         }
         private void Update()
         {
+
         }
 
 
@@ -40,29 +41,8 @@ namespace BulletBang
             deckManager.rolesDeck.Print();
                 //DealRoleCards(playerManager.GetPlayers(), deckManager.rolesDeck);
             playerManager.Print();
+            cardManager.TestCard();
         }
-        //public void DealRoleCards(List<Player> players, Deck roles)
-        //{
-        //    for(int i = 0; i < players.Count; i++)
-        //    {
-        //        Player p = playerManager.GetPlayer(i);
-                
-        //    }
-        //}
-        //private void InstantiateCard()
-        //{
-        //    GameObject newCardObject = Instantiate(cardPrefab);
-        //    CardInstance cardInstance = newCardObject.GetComponent<CardInstance>();
-        //    if (cardInstance == null)
-        //    {
-        //        Debug.LogWarning("Cardholder null");
-        //    }
-        //    else
-        //    {
-        //        Card card = cardInstance.cardData;
-        //        Debug.Log("Instantiated card: " + card);
-        //    }
-        //}
 
     }
 }

@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 989b6af786d2ca943937964d38ec09f9, type: 3}
+  m_Name: Vulture Sam
+  m_EditorClassIdentifier: 
+  cardId: 9557d194-aaeb-4057-948e-93b8d10d48d2
+  cardName: Vulture Sam
+  description: 'Whenever a player is eliminated from play, he takes in hand all the
+    cards of that player.  '
+  cardType: 1
+  frontMaterial: {fileID: 2100000, guid: cce341d2c3153ce419c023007a475720, type: 2}
+  backMaterial: {fileID: 2100000, guid: 1c766fed3e0dcf945a56cea497a55fea, type: 2}
+  characterName: 14
+  characterHealth: 4
+  characterDescription: 'Whenever a player is eliminated from play, he takes in hand
+    all the cards of that player.  '

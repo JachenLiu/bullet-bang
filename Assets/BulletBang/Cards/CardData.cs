@@ -4,7 +4,6 @@ using UnityEngine;
 
 namespace BulletBang
 {
-    [CreateAssetMenu(fileName = "New Card", menuName = "Cards/Card")]
     public class CardData : ScriptableObject
     {
         public string cardId = System.Guid.NewGuid().ToString();

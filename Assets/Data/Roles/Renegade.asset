@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e5ccf8ab9d6d154982fd8c730349e0d, type: 3}
+  m_Name: Renegade
+  m_EditorClassIdentifier: 
+  cardId: aef395a7-663b-4def-951d-ef8cfd2771f4
+  cardName: Renegade
+  description: 
+  cardType: 0
+  frontMaterial: {fileID: 2100000, guid: ec399424d6d20bd4a9307e7b399ac420, type: 2}
+  backMaterial: {fileID: 2100000, guid: ffe15f7182cc7bc4baf53955f76cea83, type: 2}
+  role: 2

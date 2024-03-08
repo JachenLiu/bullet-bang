@@ -155,12 +155,7 @@ MonoBehaviour:
   cardManager: {fileID: 833858391}
   deckManager: {fileID: 2011550260}
   turnManager: {fileID: 0}
-  cardPrefab: {fileID: 808902230383318251, guid: e605a93b49decf94397ffd4313c73ca8, type: 3}
   playerManager: {fileID: 2024750951}
-  testRole: {fileID: 0}
-  testCharacter: {fileID: 0}
-  playerCount: 5
-  playerCountInput: {fileID: 0}
 --- !u!4 &529930838
 Transform:
   m_ObjectHideFlags: 0
@@ -223,8 +218,35 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34fbee0c00d42b8409600f548366766e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  roleCards:
+  - {fileID: 11400000, guid: c45e3fb5dd0c14b49a8b455633114001, type: 2}
+  - {fileID: 11400000, guid: 7c5c40a5cdd12954ea5b4a80bdb1fa07, type: 2}
+  - {fileID: 11400000, guid: ff3a9a96690c7bf4088bcb040ad5819e, type: 2}
+  - {fileID: 11400000, guid: b8aabc37cf4abcc4080097eb7c9255e0, type: 2}
+  characterCards:
+  - {fileID: 11400000, guid: a067fbd0360f4ac488f03d5a3c89077d, type: 2}
+  - {fileID: 11400000, guid: e0aa1eb201a35f0458a9ba567f16a8eb, type: 2}
+  - {fileID: 11400000, guid: d27e559039bb4ae4baa822668ca591e7, type: 2}
+  - {fileID: 11400000, guid: ddef4869dbee37c49b34b539be1855c1, type: 2}
+  - {fileID: 11400000, guid: f3901444a323dce438de068afd0f2a07, type: 2}
+  - {fileID: 11400000, guid: 1b13ff0837c760e4884644e49b521486, type: 2}
+  - {fileID: 11400000, guid: 109fd3f2842b8ea4c8922590dfc5a952, type: 2}
+  - {fileID: 11400000, guid: 860d9814914ee374cb1609c3897ef272, type: 2}
+  - {fileID: 11400000, guid: 47ca26704076bc547a7d37e3db0c9f00, type: 2}
+  - {fileID: 11400000, guid: cce9d314dadf7984e9c2dbb77013a651, type: 2}
+  - {fileID: 11400000, guid: 3e4e9058b0570d843a9816fbda61a36a, type: 2}
+  - {fileID: 11400000, guid: 3f8be0241263cef4098d5f1a29394bbf, type: 2}
+  - {fileID: 11400000, guid: 5e9c2c7f360240a4a9d97099362507ce, type: 2}
+  - {fileID: 11400000, guid: 7bc85e75e6ea10947863fb48a0659ace, type: 2}
+  - {fileID: 11400000, guid: 6994bea388d18f64393557ddad42f226, type: 2}
+  - {fileID: 11400000, guid: f1eb364249681124185966bddd9854dd, type: 2}
   playingCards:
   - {fileID: 11400000, guid: b778253cb93ed214fa4cd56bd2674975, type: 2}
+  - {fileID: 11400000, guid: 8509b2853685ff241bb5b173c8e08e97, type: 2}
+  - {fileID: 11400000, guid: 6fcd256750da87841a5f4c4d24677ef6, type: 2}
+  - {fileID: 11400000, guid: 28c1c7bf5e175eb499fde8e88c35fa2b, type: 2}
+  - {fileID: 11400000, guid: a68a81def2a67654a825b5e36a6baee8, type: 2}
+  cardPrefab: {fileID: 2025407294326412100, guid: e605a93b49decf94397ffd4313c73ca8, type: 3}
 --- !u!1 &2011550259
 GameObject:
   m_ObjectHideFlags: 0
@@ -254,9 +276,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6b0f39162538c44d87910920ff2ea59, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rolesDeck: {fileID: 0}
-  charactersDeck: {fileID: 0}
-  playingDeck: {fileID: 0}
 --- !u!4 &2011550261
 Transform:
   m_ObjectHideFlags: 0

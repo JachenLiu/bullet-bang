@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 989b6af786d2ca943937964d38ec09f9, type: 3}
+  m_Name: Bart Cassidy
+  m_EditorClassIdentifier: 
+  cardId: fe18c81c-d55b-4ef6-81a6-b231299187f3
+  cardName: Bart Cassidy
+  description: 'Each time he is hit, he draws a card.  '
+  cardType: 1
+  frontMaterial: {fileID: 2100000, guid: ec57ddae0bb9c4b46b52a88a2c073673, type: 2}
+  backMaterial: {fileID: 2100000, guid: 1c766fed3e0dcf945a56cea497a55fea, type: 2}
+  characterName: 0
+  characterHealth: 4
+  characterDescription: 'Each time he is hit, he draws a card.  '

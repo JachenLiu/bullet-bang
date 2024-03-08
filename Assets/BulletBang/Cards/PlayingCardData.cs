@@ -5,9 +5,7 @@ using UnityEngine;
 namespace BulletBang
 {
 
-
     [CreateAssetMenu(fileName = "New Playing Card", menuName = "Cards/Playing Card")]
-
     public class PlayingCardData : CardData
     {
         [SerializeField]
@@ -18,6 +16,9 @@ namespace BulletBang
 
         [SerializeField]
         private PlayingCardType playingCardType;
+
+        [SerializeField]
+        private PlayingCardName PlayingCardName;
 
         public CardNumber GetCardNumber()
         {
@@ -30,6 +31,10 @@ namespace BulletBang
         public PlayingCardType GetPlayingCardType()
         {
             return playingCardType;
+        }
+        public PlayingCardName GetPlayingCardName()
+        {
+            return PlayingCardName;
         }
 
     }
