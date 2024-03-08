@@ -95,7 +95,7 @@ GameObject:
   - component: {fileID: 808902230383318248}
   - component: {fileID: 808902230383318249}
   - component: {fileID: 808902230383318250}
-  - component: {fileID: 5084213580744200881}
+  - component: {fileID: 2025407294326412100}
   m_Layer: 0
   m_Name: Card
   m_TagString: Untagged
@@ -191,7 +191,7 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &5084213580744200881
+--- !u!114 &2025407294326412100
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

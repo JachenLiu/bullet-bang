@@ -3,6 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 namespace BulletBang
 {
+    public enum GameState
+    {
+        Setup,
+        PlayerStartTurn,
+        PlayerDrawPhase,
+        PlayerPlayPhase,
+        PlayerDiscardPhase,
+        EndGame
+    }
     public enum CardType
     {
         Role,

@@ -4,8 +4,8 @@ using UnityEngine;
 
 namespace BulletBang
 {
-    public class CardHolder : MonoBehaviour
+    public class CardInstance : MonoBehaviour
     {
-        public Card card;
+        public CardData cardData;
     }
 }
