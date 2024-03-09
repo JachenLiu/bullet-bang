@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using JetBrains.Annotations;
 
 namespace BulletBang
 {
@@ -21,11 +22,27 @@ namespace BulletBang
 
         private void Start()
         {
+            //player lobby
+            //start game
+            //turn manager
+            //end game
             playerManager.TestPlayers();
             InitializeGame();
+
         }
         private void Update()
         {
+            //switch (currentState)
+            //{
+            //    case GameState.Setup:
+            //        break;
+            //    case GameState.StartGame:
+            //        break;
+            //    case GameState.EndGame:
+            //        break;
+            //    default:
+            //        break;
+            //}
 
         }
 
@@ -36,13 +53,18 @@ namespace BulletBang
         }
         private void InitializeGame()
         {
-            deckManager.charactersDeck.Print();
-            deckManager.playingDeck.Print();
-            deckManager.rolesDeck.Print();
+            //deckManager.SetRoleDeck(cardManager.GetRoleCards(), 8);
                 //DealRoleCards(playerManager.GetPlayers(), deckManager.rolesDeck);
             playerManager.Print();
-            cardManager.TestCard();
-        }
+            deckManager.SetRolesDeck(cardManager.GetRoleCardsData(), 8 );
+            deckManager.SetCharacterDeck(cardManager.GetCharacterCardsData());
+            deckManager.SetPlayingDeck(cardManager.GetPlayingCardsData());
 
+            deckManager.GetRoleDeck();
+            //DeckInstance roleInstance = new();
+            //roleInstance.CreateDeckInstance(deckManager.GetRoleDeck());
+            //cardManager.TestCard();
+        }
+        
     }
 }

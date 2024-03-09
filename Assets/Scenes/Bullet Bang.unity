@@ -240,12 +240,31 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 7bc85e75e6ea10947863fb48a0659ace, type: 2}
   - {fileID: 11400000, guid: 6994bea388d18f64393557ddad42f226, type: 2}
   - {fileID: 11400000, guid: f1eb364249681124185966bddd9854dd, type: 2}
+  - {fileID: 11400000, guid: 9514506e678a9014a906c27742b7df17, type: 2}
+  - {fileID: 11400000, guid: 94b99e434fb7f724c81e4e9287c947da, type: 2}
+  - {fileID: 11400000, guid: c44d1b0281317cb4ea9779bf0bad0718, type: 2}
   playingCards:
   - {fileID: 11400000, guid: b778253cb93ed214fa4cd56bd2674975, type: 2}
   - {fileID: 11400000, guid: 8509b2853685ff241bb5b173c8e08e97, type: 2}
   - {fileID: 11400000, guid: 6fcd256750da87841a5f4c4d24677ef6, type: 2}
   - {fileID: 11400000, guid: 28c1c7bf5e175eb499fde8e88c35fa2b, type: 2}
   - {fileID: 11400000, guid: a68a81def2a67654a825b5e36a6baee8, type: 2}
+  - {fileID: 11400000, guid: 93daa012ac8e2cf4292659a0359ac185, type: 2}
+  - {fileID: 11400000, guid: 2b09a5de4ec010a4c89adf7634e72eb5, type: 2}
+  - {fileID: 11400000, guid: c470bb5477b3c334880a8956b0a89c70, type: 2}
+  - {fileID: 11400000, guid: 0a33feb2132196344abff69b5cbce879, type: 2}
+  - {fileID: 11400000, guid: 615db456a7235514db73836d324fa13e, type: 2}
+  - {fileID: 11400000, guid: 98159ff87c4fdb04eb44f5b1724e1ecf, type: 2}
+  - {fileID: 11400000, guid: 5c0f4e160c9353440be1e9a2a72763f9, type: 2}
+  - {fileID: 11400000, guid: f3e3a00110cf97941881f2ce03a0cddd, type: 2}
+  - {fileID: 11400000, guid: 39b7ddff36e23634583806fb3f1c671d, type: 2}
+  - {fileID: 11400000, guid: 655b53a0aa11bf1419e73bdac26247e8, type: 2}
+  - {fileID: 11400000, guid: dcc7027cd5b23244992a24528314bbc3, type: 2}
+  - {fileID: 11400000, guid: 774eb95ab62fd2b469839bd16943888c, type: 2}
+  - {fileID: 11400000, guid: 80a955ae32b01904abdab5bc5f3115e3, type: 2}
+  - {fileID: 11400000, guid: 1f0e59cb02d41774b96159dcace5d7cc, type: 2}
+  - {fileID: 11400000, guid: 47392b0d1819f3e49a44288082357297, type: 2}
+  - {fileID: 11400000, guid: 2f6191453bd35d44ea5721c3a99385a1, type: 2}
   cardPrefab: {fileID: 2025407294326412100, guid: e605a93b49decf94397ffd4313c73ca8, type: 3}
 --- !u!1 &2011550259
 GameObject:

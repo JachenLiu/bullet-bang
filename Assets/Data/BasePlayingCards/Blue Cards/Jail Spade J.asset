@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f10e06a8e478904a953739d763583a0, type: 3}
+  m_Name: Jail Spade J
+  m_EditorClassIdentifier: 
+  cardId: 642fab51-0dc9-403a-b0d3-5db9858ab8db
+  cardName: Jail
+  description: 
+  cardType: 2
+  frontMaterial: {fileID: 2100000, guid: 58884b1be95fd2549939946b01243fd7, type: 2}
+  backMaterial: {fileID: 2100000, guid: 5f98db71bede58c418ac281e82742d59, type: 2}
+  number: 11
+  suit: 0
+  playingCardType: 1
+  PlayingCardName: 9

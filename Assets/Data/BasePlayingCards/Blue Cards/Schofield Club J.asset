@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0f10e06a8e478904a953739d763583a0, type: 3}
-  m_Name: VolcanicSpade10
+  m_Name: Schofield Club J
   m_EditorClassIdentifier: 
-  cardId: c3cbac10-0c22-4437-99ce-a7f2e252bb78
-  cardName: Volcanic Spade 10
+  cardId: 4cf7a4ba-38e2-4023-b681-e1bab63922fe
+  cardName: Schofield
   description: 
   cardType: 2
-  frontMaterial: {fileID: 2100000, guid: fd15cb02706cf3641b248ca3136ff9b1, type: 2}
+  frontMaterial: {fileID: 2100000, guid: 0002bcc36c45db74094d5f31ccc95b69, type: 2}
   backMaterial: {fileID: 2100000, guid: 5f98db71bede58c418ac281e82742d59, type: 2}
-  number: 10
-  suit: 0
-  playingCardType: 0
-  PlayingCardName: 0
+  number: 11
+  suit: 2
+  playingCardType: 1
+  PlayingCardName: 1

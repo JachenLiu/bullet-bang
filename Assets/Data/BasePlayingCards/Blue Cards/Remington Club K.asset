@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f10e06a8e478904a953739d763583a0, type: 3}
+  m_Name: Remington Club K
+  m_EditorClassIdentifier: 
+  cardId: e4d7ff6e-8d83-4b18-8e67-3adefa3ff4e6
+  cardName: Remington
+  description: 
+  cardType: 2
+  frontMaterial: {fileID: 2100000, guid: 82a6e980c54f1aa4d816549d812b488b, type: 2}
+  backMaterial: {fileID: 2100000, guid: 5f98db71bede58c418ac281e82742d59, type: 2}
+  number: 13
+  suit: 2
+  playingCardType: 1
+  PlayingCardName: 2

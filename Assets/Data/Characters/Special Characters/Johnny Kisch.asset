@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 989b6af786d2ca943937964d38ec09f9, type: 3}
+  m_Name: Johnny Kisch
+  m_EditorClassIdentifier: 
+  cardId: 7c1defc6-3514-4fa2-a99c-05d94773e306
+  cardName: Johnny Kisch
+  description: 'Each time he puts a card into play, all other cards in play with
+    the same name are discarded. '
+  cardType: 1
+  frontMaterial: {fileID: 2100000, guid: 339d1c07a00cc9643a56d46fe7278683, type: 2}
+  backMaterial: {fileID: 2100000, guid: 1c766fed3e0dcf945a56cea497a55fea, type: 2}
+  characterName: 17
+  characterHealth: 4
+  characterDescription: 'Each time he puts a card into play, all other cards in play
+    with the same name are discarded. '

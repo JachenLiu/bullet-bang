@@ -91,25 +91,25 @@ namespace BulletBang
         {
             playerHealth = playerHealth + heal;
         }
-        public CardInstance UseCardFromHand(CardInstance usedCard)
-        {
-            playerHand.RemoveCard(usedCard);
-            return usedCard;
-        }
-        public CardInstance UseCardFromInPlay(CardInstance usedCard)
-        {
-            playerInPlay.RemoveCard(usedCard);
-            return usedCard;
-        }
-        public void AddCardToHand(CardInstance drawnCard)
-        {
-            playerHand.AddCard(drawnCard);
-        }
-        public void UseCardFromHandToInPlay(CardInstance usedCard)
-        {
-            playerHand.RemoveCard(usedCard);
-            playerInPlay.AddCard(usedCard);
-        }
+        //public CardInstance UseCardFromHand(CardInstance usedCard)
+        //{
+        //    playerHand.RemoveCard(usedCard);
+        //    return usedCard;
+        //}
+        //public CardInstance UseCardFromInPlay(CardInstance usedCard)
+        //{
+        //    playerInPlay.RemoveCard(usedCard);
+        //    return usedCard;
+        //}
+        //public void AddCardToHand(CardInstance drawnCard)
+        //{
+        //    playerHand.AddCard(drawnCard);
+        //}
+        //public void UseCardFromHandToInPlay(CardInstance usedCard)
+        //{
+        //    playerHand.RemoveCard(usedCard);
+        //    playerInPlay.AddCard(usedCard);
+        //}
 
     }
 }

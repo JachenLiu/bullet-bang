@@ -6,11 +6,9 @@ namespace BulletBang
     public enum GameState
     {
         Setup,
-        PlayerStartTurn,
-        PlayerDrawPhase,
-        PlayerPlayPhase,
-        PlayerDiscardPhase,
-        EndGame
+        StartGame,
+        EndGame,
+        GameOver,
     }
     public enum CardType
     {

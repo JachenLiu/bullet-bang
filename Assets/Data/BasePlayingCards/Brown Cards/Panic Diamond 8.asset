@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0f10e06a8e478904a953739d763583a0, type: 3}
-  m_Name: SchofieldClubJ
+  m_Name: Panic Diamond 8
   m_EditorClassIdentifier: 
-  cardId: 4cf7a4ba-38e2-4023-b681-e1bab63922fe
-  cardName: Schofield Club J
+  cardId: d88e0762-1d27-428b-bc68-7655456fb630
+  cardName: Panic
   description: 
   cardType: 2
-  frontMaterial: {fileID: 2100000, guid: 0002bcc36c45db74094d5f31ccc95b69, type: 2}
+  frontMaterial: {fileID: 2100000, guid: 6e63d0e1a67c699468db833c180efecf, type: 2}
   backMaterial: {fileID: 2100000, guid: 5f98db71bede58c418ac281e82742d59, type: 2}
-  number: 11
-  suit: 2
+  number: 8
+  suit: 3
   playingCardType: 0
-  PlayingCardName: 1
+  PlayingCardName: 12
