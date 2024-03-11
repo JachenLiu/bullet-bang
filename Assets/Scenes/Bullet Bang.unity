@@ -265,7 +265,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 1f0e59cb02d41774b96159dcace5d7cc, type: 2}
   - {fileID: 11400000, guid: 47392b0d1819f3e49a44288082357297, type: 2}
   - {fileID: 11400000, guid: 2f6191453bd35d44ea5721c3a99385a1, type: 2}
-  cardPrefab: {fileID: 2025407294326412100, guid: e605a93b49decf94397ffd4313c73ca8, type: 3}
 --- !u!1 &2011550259
 GameObject:
   m_ObjectHideFlags: 0
@@ -295,6 +294,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6b0f39162538c44d87910920ff2ea59, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  roleDeck: []
+  characterDeck: []
+  playingDeck: []
 --- !u!4 &2011550261
 Transform:
   m_ObjectHideFlags: 0

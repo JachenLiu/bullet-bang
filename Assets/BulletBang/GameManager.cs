@@ -19,6 +19,7 @@ namespace BulletBang
         public PlayerManager playerManager;
         private GameState currentState = GameState.Setup;
 
+        public DeckInstance deckInstance;
 
         private void Start()
         {
@@ -61,6 +62,7 @@ namespace BulletBang
             deckManager.SetPlayingDeck(cardManager.GetPlayingCardsData());
 
             deckManager.GetRoleDeck();
+            deckInstance = Instantiate(deckInstance);
             //DeckInstance roleInstance = new();
             //roleInstance.CreateDeckInstance(deckManager.GetRoleDeck());
             //cardManager.TestCard();

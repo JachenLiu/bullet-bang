@@ -32,16 +32,16 @@ namespace BulletBang
             return deckCardInstances[index];
         }
 
-        public void ShuffleDeck(List<CardInstance> deck)
+        public void ShuffleDeck()
         {
-            int n = deck.Count;
+            int n = deckCardInstances.Count;
             while (n > 1)
             {
                 n--;
                 int k = Random.Range(0, n + 1);
-                CardInstance c = deck[k];
-                deck[k] = deck[n];
-                deck[n] = c;
+                CardInstance c = deckCardInstances[k];
+                deckCardInstances[k] = deckCardInstances[n];
+                deckCardInstances[n] = c;
             }
         }
     }
