@@ -11,13 +11,13 @@ GameObject:
   - component: {fileID: 5933680180819860408}
   - component: {fileID: 8023115442682772738}
   - component: {fileID: 3932898524226059759}
-  - component: {fileID: 8673660910274141156}
   - component: {fileID: 254210813549967548}
   - component: {fileID: 5190612035323418105}
   - component: {fileID: 4226073535391059918}
-  - component: {fileID: 3619398720327649520}
+  - component: {fileID: 1631440931573300831}
+  - component: {fileID: 691163223847596242}
   m_Layer: 0
-  m_Name: Player
+  m_Name: PlayerCharacter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -89,60 +89,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &8673660910274141156
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5310667009955781495}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0fb820519c2f7f94184b7cc309698d16, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 5
-  rotationSpeed: 100
-  force: 700
-  jumpForce: 350
-  isGrounded: 0
-  isJumping: 0
-  isFiring: 0
-  isReloading: 0
-  isDead: 0
-  isInvincible: 0
-  isAiming: 0
-  isCrouching: 0
-  isSprinting: 0
-  isWalking: 0
-  isRunning: 0
-  isIdle: 0
-  isMoving: 0
-  isShooting: 0
-  isAbleToShoot: 0
-  isAbleToReload: 0
-  isAbleToJump: 0
-  isAbleToCrouch: 0
-  isAbleToSprint: 0
-  isAbleToWalk: 0
-  isAbleToRun: 0
-  isAbleToAim: 0
-  isAbleToMove: 0
-  isAbleToDie: 0
-  isAbleToRespawn: 0
-  isAbleToRevive: 0
-  isAbleToHeal: 0
-  isAbleToTakeDamage: 0
-  isAbleToBeInvincible: 0
-  isAbleToBeVulnerable: 0
-  isAbleToBeIncapacitated: 0
-  isAbleToBeKilled: 0
-  isAbleToBeRevived: 0
-  isAbleToBeHealed: 0
-  isAbleToBeDamaged: 0
-  playerName: 
-  playerHealth: 0
-  playerMaxHealth: 0
 --- !u!136 &254210813549967548
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -183,8 +129,8 @@ MonoBehaviour:
   Flags: 262145
   NestedObjects: []
   NetworkedBehaviours:
-  - {fileID: 8673660910274141156}
-  - {fileID: 3619398720327649520}
+  - {fileID: 1631440931573300831}
+  - {fileID: 691163223847596242}
 --- !u!143 &4226073535391059918
 CharacterController:
   m_ObjectHideFlags: 0
@@ -211,7 +157,7 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &3619398720327649520
+--- !u!114 &1631440931573300831
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -220,15 +166,28 @@ MonoBehaviour:
   m_GameObject: {fileID: 5310667009955781495}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 378411a89480da345945c2f888327a2d, type: 3}
+  m_Script: {fileID: 158639473, guid: e725a070cec140c4caffb81624c8c787, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gravity: -20
-  jumpImpulse: 8
-  acceleration: 10
-  braking: 10
-  maxSpeed: 2
-  rotationSpeed: 15
+  SyncScale: 0
+  SyncParent: 0
+  _autoAOIOverride: 1
+  DisableSharedModeInterpolation: 0
+--- !u!114 &691163223847596242
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5310667009955781495}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0963286e37b8548c3833a2cf03916382, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PlayerSpeed: 2
+  JumpForce: 5
+  GravityValue: -9.81
 --- !u!1 &7649115943306691192
 GameObject:
   m_ObjectHideFlags: 0
