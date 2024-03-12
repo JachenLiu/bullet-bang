@@ -1,11 +1,78 @@
-﻿using System.Collections;
+﻿using Fusion;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace BulletBang
 {
-    public class Player : MonoBehaviour
+    public class Player : NetworkBehaviour
     {
+        private NetworkCharacterController _cc;
+        private void Awake()
+        {
+            _cc = GetComponent<NetworkCharacterController>();
+        }
+        public override void FixedUpdateNetwork()
+        {
+            if(GetInput(out NetworkInputData data))
+            {
+                data.direction.Normalize();
+                _cc.Move(5*data.direction*Runner.DeltaTime);
+            }
+        }
+        public float speed = 5.0f;
+        public float rotationSpeed = 100.0f;
+        public float force = 700.0f;
+        public float jumpForce = 350.0f;
+        public bool isGrounded;
+        public bool isJumping;
+        public bool isFiring;
+        public bool isReloading;
+        public bool isDead;
+        public bool isInvincible;
+        public bool isAiming;
+        public bool isCrouching;
+        public bool isSprinting;
+        public bool isWalking;
+        public bool isRunning;
+        public bool isIdle;
+        public bool isMoving;
+        public bool isShooting;
+        public bool isAbleToShoot;
+        public bool isAbleToReload;
+        public bool isAbleToJump;
+        public bool isAbleToCrouch;
+        public bool isAbleToSprint;
+        public bool isAbleToWalk;
+        public bool isAbleToRun;
+        public bool isAbleToAim;
+        public bool isAbleToMove;
+        public bool isAbleToDie;
+        public bool isAbleToRespawn;
+        public bool isAbleToRevive;
+        public bool isAbleToHeal;
+        public bool isAbleToTakeDamage;
+        public bool isAbleToBeInvincible;
+        public bool isAbleToBeVulnerable;
+        public bool isAbleToBeIncapacitated;
+        public bool isAbleToBeKilled;
+        public bool isAbleToBeRevived;
+        public bool isAbleToBeHealed;
+        public bool isAbleToBeDamaged;
+        //public bool isAbleToBeInvincible;
+        //public bool isAbleToBeVulnerable;
+        //public bool isAbleToBeIncapacitated;
+        //public bool isAbleToBeKilled;
+        //public bool isAbleToBeRevived;
+        //public bool isAbleToBeHealed;
+        //public bool isAbleToBeDamaged;
+        //public bool isAbleToBeInvincible;
+        //public bool isAbleToBeVulnerable;
+        //public bool isAbleToBeIncapacitated;
+        //public bool isAbleToBeKilled;
+        //public bool isAbleToBeRevived;
+        //public bool isAbleToBe
+
         public string playerName;
         public int playerHealth;
         public int playerMaxHealth;
