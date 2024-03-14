@@ -1,15 +1,18 @@
 using Fusion;
 using UnityEngine;
 
-public class PlayerSpawner : SimulationBehaviour, IPlayerJoined
+namespace BulletBang
 {
-    public GameObject PlayerPrefab;
-
-    public void PlayerJoined(PlayerRef player)
+    public class PlayerSpawner : SimulationBehaviour, IPlayerJoined
     {
-        if (player == Runner.LocalPlayer)
+        public GameObject PlayerPrefab;
+
+        public void PlayerJoined(PlayerRef player)
         {
-            Runner.Spawn(PlayerPrefab, new Vector3(0, 1, 0), Quaternion.identity);
+            if (player == Runner.LocalPlayer)
+            {
+                Runner.Spawn(PlayerPrefab, new Vector3(0, 1, 0), Quaternion.identity);
+            }
         }
     }
 }
