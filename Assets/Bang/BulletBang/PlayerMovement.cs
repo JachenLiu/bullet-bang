@@ -15,7 +15,7 @@ namespace BulletBang
         public float JumpForce = 5f;
         public float GravityValue = -9.81f;
 
-        //public Camera Camera;
+        public Camera Camera;
 
         private void Awake()
         {
@@ -29,14 +29,6 @@ namespace BulletBang
                 _jumpPressed = true;
             }
         }
-        public override void Spawned()
-        {
-            //if (HasStateAuthority)
-            //{
-            //    Camera = Camera.main;
-            //    Camera.GetComponent<PlayerCamera>().Target = transform;
-            //}
-        }
 
         public override void FixedUpdateNetwork()
         {
@@ -45,30 +37,38 @@ namespace BulletBang
             {
                 return;
             }
-            
+
             if (_controller.isGrounded)
             {
                 _velocity = new Vector3(0, -1, 0);
             }
 
-            //Quaternion cameraRotationY = Quaternion.Euler(0, Camera.transform.rotation.eulerAngles.y, 0);
-            Vector3 move = /*cameraRotationY * */  new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical")) * Runner.DeltaTime * PlayerSpeed;
+            Quaternion cameraRotationY = Quaternion.Euler(0, Camera.transform.rotation.eulerAngles.y, 0);
+            Vector3 move = cameraRotationY * new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical")) * Runner.DeltaTime * PlayerSpeed;
 
             _velocity.y += GravityValue * Runner.DeltaTime;
+
             if (_jumpPressed && _controller.isGrounded)
             {
                 _velocity.y += JumpForce;
             }
             _controller.Move(move + _velocity * Runner.DeltaTime);
 
-
-            //look in direction moving
             if (move != Vector3.zero)
             {
                 gameObject.transform.forward = move;
             }
 
             _jumpPressed = false;
+
+        }
+        public override void Spawned()
+        {
+            if (HasStateAuthority)
+            {
+                Camera = Camera.main;
+                Camera.GetComponent<PlayerCamera>().Target = transform;
+            }
         }
     }
 }

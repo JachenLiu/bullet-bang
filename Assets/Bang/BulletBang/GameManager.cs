@@ -24,29 +24,29 @@ namespace BulletBang
 
         public DeckInstance deckInstance;
 
-        //private void Start()
-        //{
-        //    //player lobby
-        //    //start game
-        //    //turn manager
-        //    //end game
-        //    playerManager.TestPlayers();
-        //    InitializeGame();
+        private void Start()
+        {
+            //player lobby
+            //start game
+            //turn manager
+            //end game
+            playerManager.TestPlayers();
+            InitializeGame();
 
-        //}
+        }
         //private void Update()
         //{
-            //switch (currentState)
-            //{
-            //    case GameState.Setup:
-            //        break;
-            //    case GameState.StartGame:
-            //        break;
-            //    case GameState.EndGame:
-            //        break;
-            //    default:
-            //        break;
-            //}
+        //switch (currentState)
+        //{
+        //    case GameState.Setup:
+        //        break;
+        //    case GameState.StartGame:
+        //        break;
+        //    case GameState.EndGame:
+        //        break;
+        //    default:
+        //        break;
+        //}
 
         //}
 
@@ -65,7 +65,7 @@ namespace BulletBang
             deckManager.SetPlayingDeck(cardManager.GetPlayingCardsData());
 
             deckManager.GetRoleDeck();
-            deckInstance = Instantiate(deckInstance);
+            //deckInstance = Instantiate(deckInstance);
             //DeckInstance roleInstance = new();
             //roleInstance.CreateDeckInstance(deckManager.GetRoleDeck());
             //cardManager.TestCard();

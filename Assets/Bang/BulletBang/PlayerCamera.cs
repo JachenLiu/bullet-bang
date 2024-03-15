@@ -5,25 +5,9 @@ using Fusion;
 
 namespace BulletBang
 {
-    public class PlayerCamera : NetworkBehaviour
+    public class PlayerCamera : MonoBehaviour
     {
         public Transform Target;
-        public Camera playerCamera;
-
-
-        private void Awake()
-        {
-            playerCamera = GetComponent<Camera>();
-        }
-        void Start()
-        {
-            if (playerCamera.enabled)
-            {
-                playerCamera.transform.parent = null;
-            }
-        }
-
-
         public float MouseSensitivity = 10f;
 
         private float verticalRotation;
@@ -31,16 +15,12 @@ namespace BulletBang
 
         void LateUpdate()
         {
-            if(Target == null)
-            {
-                return;
-            }
-            if (!playerCamera.enabled)
+            if (Target == null)
             {
                 return;
             }
 
-            playerCamera.transform.position = Target.position;
+            transform.position = Target.position;
 
             float mouseX = Input.GetAxis("Mouse X");
             float mouseY = Input.GetAxis("Mouse Y");
@@ -52,6 +32,5 @@ namespace BulletBang
 
             transform.rotation = Quaternion.Euler(verticalRotation, horizontalRotation, 0);
         }
-
     }
 }
