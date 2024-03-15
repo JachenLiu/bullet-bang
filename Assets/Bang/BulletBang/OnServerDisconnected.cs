@@ -4,14 +4,14 @@ using UnityEngine;
 using Fusion;
 using Fusion.Sockets;
 using System;
+using UnityEngine.SceneManagement;
 
 namespace BulletBang
 {
-    public class LocalInputPoller : MonoBehaviour, INetworkRunnerCallbacks
+    public class OnServerDisconnected : MonoBehaviour, INetworkRunnerCallbacks
     {
         public void OnConnectedToServer(NetworkRunner runner)
         {
-
         }
 
         public void OnConnectFailed(NetworkRunner runner, NetAddress remoteAddress, NetConnectFailedReason reason)
@@ -78,12 +78,18 @@ namespace BulletBang
         {
         }
 
+        [SerializeField] private string _menuSceneName = String.Empty;
+
         public void OnShutdown(NetworkRunner runner, ShutdownReason shutdownReason)
         {
+            // When the local NetworkRunner has shut down, the menu scene is loaded.
+            SceneManager.LoadScene(_menuSceneName);
         }
 
         public void OnUserSimulationMessage(NetworkRunner runner, SimulationMessagePtr message)
         {
         }
+
     }
+
 }
