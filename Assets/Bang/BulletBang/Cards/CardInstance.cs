@@ -1,12 +1,14 @@
+using Fusion;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace BulletBang
 {
-    public class CardInstance : MonoBehaviour
+    public class CardInstance : NetworkBehaviour
     {
-        public CardData cardData;
+        public CardData cardData { get; private set; }
+        public bool cardInPlay {  get; private set; }
 
         public void SetCardData(CardData cardData)
         {

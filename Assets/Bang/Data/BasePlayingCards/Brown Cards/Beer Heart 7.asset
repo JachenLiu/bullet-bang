@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0f10e06a8e478904a953739d763583a0, type: 3}
-  m_Name: Schofield Club Q
+  m_Name: Beer Heart 7
   m_EditorClassIdentifier: 
-  cardId: ddd7f0c5-d575-4b20-b1b1-4fdabb17aa81
-  cardName: Schofield
+  cardId: 2bb89b79-18c6-4ef6-a1e7-230f7bd6918c
+  cardName: Beer
   description: 
   cardType: 2
-  frontMaterial: {fileID: 2100000, guid: 9f05fcb37ede5cf4781d04f1658a4390, type: 2}
+  frontMaterial: {fileID: 2100000, guid: f261d9752c10aee4399cfa6d2ebcff67, type: 2}
   backMaterial: {fileID: 2100000, guid: 5f98db71bede58c418ac281e82742d59, type: 2}
-  number: 12
-  suit: 2
-  playingCardType: 1
-  PlayingCardName: 1
+  number: 7
+  suit: 1
+  playingCardType: 0
+  PlayingCardName: 13

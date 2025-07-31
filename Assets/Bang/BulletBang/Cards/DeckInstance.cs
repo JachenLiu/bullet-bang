@@ -1,22 +1,35 @@
+using Fusion;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace BulletBang
 {
-    public class DeckInstance : MonoBehaviour
+    public class DeckInstance : NetworkBehaviour
     {
-        public List<CardInstance> deckCardInstances = new List<CardInstance>();
+        //public List<CardInstance> deckCardInstances = new List<CardInstance>();
+        List<CardInstance> deckCardInstances = new List<CardInstance>();
 
         public CardInstance cardPrefab;
-        public void CreateDeckInstance(List<CardData> cardList)
+        public DeckInstance deckInstance;
+        public void Start()
+        {
+            SpawnDeckInstance();
+        }
+        private void SpawnDeckInstance()
+        {
+            deckInstance = Runner.Spawn(deckInstance, Vector3.zero, Quaternion.identity, Object.StateAuthority).GetComponent<DeckInstance>();
+        }
+        public List<CardInstance> CreateDeckInstance<T>(List<T> cardList) where T : CardData
         {
             foreach(CardData c in cardList)
             {
-                CardInstance cardInstance = Instantiate(cardPrefab, GetRandomPosition(), Quaternion.identity, transform);
+                CardInstance cardInstance = Runner.Spawn(cardPrefab, GetRandomPosition(), Quaternion.identity, Object.StateAuthority).GetComponent<CardInstance>();
                 cardInstance.SetCardData(c);
                 deckCardInstances.Add(cardInstance);
+
             }
+            return deckCardInstances;
         }
         private Vector3 GetRandomPosition()
         {

@@ -1,10 +1,12 @@
+using Fusion;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace BulletBang
 {
-    public class DeckManager : MonoBehaviour
+    public class DeckManager : NetworkBehaviour
     {
 
         [SerializeField]
@@ -16,9 +18,7 @@ namespace BulletBang
         [SerializeField]
         private List<PlayingCardData> playingDeck = new();
 
-        //public CardInstance cardPrefab;
-
-        //set roles based off of player count
+        //set roles based off of max player count 8
         public void SetRolesDeck(List<RoleCardData> roleCardData, int playerCount)
         {
             foreach (RoleCardData roleCard in roleCardData)
@@ -69,6 +69,10 @@ namespace BulletBang
 
         public List<RoleCardData> GetRoleDeck()
         {
+            foreach (RoleCardData roleCard in roleDeck)
+            {
+                Debug.Log(roleCard);
+            }
             return roleDeck;
         }
 

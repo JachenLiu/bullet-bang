@@ -5,10 +5,17 @@ namespace BulletBang
 {
     public enum GameState
     {
+        Lobby,
         Setup,
         StartGame,
         EndGame,
         GameOver,
+    }
+    public enum TurnPhase
+    {
+        DrawPhase,
+        PlayPhase,
+        DiscardPhase,
     }
     public enum CardType
     {

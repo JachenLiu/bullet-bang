@@ -1,0 +1,137 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &8283688477684417655
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6597160943677830936}
+  - component: {fileID: 1423946437319029326}
+  - component: {fileID: 3619428322629073930}
+  - component: {fileID: 139950279601299835}
+  m_Layer: 0
+  m_Name: Player
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6597160943677830936
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8283688477684417655}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 10, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1423946437319029326
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8283688477684417655}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1552182283, guid: e725a070cec140c4caffb81624c8c787, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SortKey: 2770970704
+  ObjectInterest: 1
+  Flags: 262145
+  NestedObjects: []
+  NetworkedBehaviours:
+  - {fileID: 3619428322629073930}
+  - {fileID: 139950279601299835}
+--- !u!114 &3619428322629073930
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8283688477684417655}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0fb820519c2f7f94184b7cc309698d16, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 5
+  rotationSpeed: 100
+  force: 700
+  jumpForce: 350
+  isGrounded: 0
+  isJumping: 0
+  isFiring: 0
+  isReloading: 0
+  isDead: 0
+  isInvincible: 0
+  isAiming: 0
+  isCrouching: 0
+  isSprinting: 0
+  isWalking: 0
+  isRunning: 0
+  isIdle: 0
+  isMoving: 0
+  isShooting: 0
+  isAbleToShoot: 0
+  isAbleToReload: 0
+  isAbleToJump: 0
+  isAbleToCrouch: 0
+  isAbleToSprint: 0
+  isAbleToWalk: 0
+  isAbleToRun: 0
+  isAbleToAim: 0
+  isAbleToMove: 0
+  isAbleToDie: 0
+  isAbleToRespawn: 0
+  isAbleToRevive: 0
+  isAbleToHeal: 0
+  isAbleToTakeDamage: 0
+  isAbleToBeInvincible: 0
+  isAbleToBeVulnerable: 0
+  isAbleToBeIncapacitated: 0
+  isAbleToBeKilled: 0
+  isAbleToBeRevived: 0
+  isAbleToBeHealed: 0
+  isAbleToBeDamaged: 0
+  playerID: 0
+  playerName: 
+  playerHealth: 0
+  playerMaxHealth: 0
+--- !u!114 &139950279601299835
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8283688477684417655}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85309c7751a118649a4def54c5f5fe48, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _PlayerName: 
+  _PlayerId:
+    _length: 0
+    _data:
+      Data: 0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  _MaxHealth: 0
+  _CurrentHealth: 0
+  _Role: 0
+  _Character: 0
+  _IsReady:
+    _value: 0
+  _IsDead:
+    _value: 0
+  _DistanceModifierToOthers: 0
+  _DistanceModifierFromOthers: 0
