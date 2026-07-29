@@ -11,12 +11,12 @@ using System.Threading;
 namespace BulletBang
 {
     /// <summary>
-    /// Owns the shared social-lobby Fusion session. Match rules belong to the
-    /// authoritative GameSession spawned by a table; this class should only manage
-    /// presence, lobby avatars, and table discovery.
+    /// Owns the generic shared social-lobby Fusion session: presence, roaming
+    /// avatars, and table discovery. It contains no game-specific rules.
     /// </summary>
-    public class MainLobbyManager : MonoBehaviour, INetworkRunnerCallbacks
+    public sealed class MainLobbyManager : MonoBehaviour, INetworkRunnerCallbacks
     {
+        /// <summary>The active lobby network lifecycle owner, if one exists.</summary>
         public static MainLobbyManager Instance { get; private set; }
 
         [Header("Network Settings")]
@@ -34,9 +34,51 @@ namespace BulletBang
         private List<NetworkObject> _gameTables = new List<NetworkObject>();
         private bool _isShuttingDown;
 
+        /// <summary>Raised after this client successfully creates the shared lobby.</summary>
         public event Action<NetworkRunner> OnLobbyStarted;
+
+        /// <summary>Raised after this client successfully joins the shared lobby.</summary>
         public event Action<NetworkRunner> OnLobbyJoined;
+
+        /// <summary>Raised after the local runner has shut down.</summary>
         public event Action OnLobbyLeft;
+
+        /// <summary>
+        /// Current public entry path. Every player targets the same named lobby;
+        /// Fusion joins the existing host or makes the first player the host.
+        /// Explicit StartLobbyHost/JoinLobby remain available for future private
+        /// rooms, regions, matchmaking, or lobby sharding.
+        /// </summary>
+        public async Task<bool> ConnectMainLobby()
+        {
+            if (_runner != null || networkRunnerPrefab == null) return false;
+
+            _runner = Instantiate(networkRunnerPrefab);
+            var startingRunner = _runner;
+            _runner.name = "Main Lobby Network Runner";
+            ConfigureRunner(_runner);
+
+            var args = new StartGameArgs
+            {
+                GameMode = GameMode.AutoHostOrClient,
+                SessionName = "MainLobby",
+                Scene = SceneRef.FromIndex(SceneManager.GetActiveScene().buildIndex),
+                SceneManager = GetSceneManager(_runner),
+                PlayerCount = 32
+            };
+
+            var result = await _runner.StartGame(args);
+            if (!result.Ok)
+            {
+                Debug.LogError($"Failed to enter the main lobby: {result.ShutdownReason}");
+                await CleanupFailedRunner(startingRunner);
+                return false;
+            }
+
+            if (_runner.IsServer) OnLobbyStarted?.Invoke(_runner);
+            else OnLobbyJoined?.Invoke(_runner);
+            return true;
+        }
 
         private void Awake()
         {
@@ -172,11 +214,7 @@ namespace BulletBang
                 return;
             }
 
-            var defaultPositions = new[]
-            {
-                new Vector3(-8, 0, 4.5f), new Vector3(0, 0, 4.5f), new Vector3(8, 0, 4.5f),
-                new Vector3(-8, 0, -3), new Vector3(0, 0, -3), new Vector3(8, 0, -3)
-            };
+            var defaultPositions = new[] { new Vector3(0f, 0f, 3f) };
             var count = tableSpawnPoints != null && tableSpawnPoints.Length > 0
                 ? tableSpawnPoints.Length : defaultPositions.Length;
             for (int i = 0; i < count; i++)
@@ -254,9 +292,11 @@ namespace BulletBang
         {
             input.Set(new NetworkInputData
             {
-                MovementInput = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")),
-                RotationInput = Input.GetAxis("Mouse X")
-            });
+                  MovementInput = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")),
+                  RotationInput = Input.GetAxis("Mouse X"),
+                  JumpHeld = Input.GetButton("Jump"),
+                  CrouchHeld = Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.C)
+              });
         }
         public void OnInputMissing(NetworkRunner runner, PlayerRef player, NetworkInput input) { }
         public void OnObjectEnterAOI(NetworkRunner runner, NetworkObject obj, PlayerRef player) { }

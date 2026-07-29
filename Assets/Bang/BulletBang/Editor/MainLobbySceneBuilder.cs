@@ -37,8 +37,7 @@ namespace BulletBang.Editor
             var root = new GameObject(RootName);
             BuildRoom(root.transform, floor, plaster, wood);
             BuildBar(root.transform, wood, brass);
-            BuildTableBays(root.transform, wood, felt, red);
-            BuildSpectatorRail(root.transform, wood, brass);
+            BuildSingleTable(root.transform, wood, felt, red);
             BuildLighting(root.transform);
             BuildSpawnAndWayfinding(root.transform, red);
             ConfigureExistingScene(root.transform);
@@ -51,57 +50,48 @@ namespace BulletBang.Editor
 
         private static void BuildRoom(Transform root, Material floor, Material wall, Material wood)
         {
-            Box("Floor", root, new Vector3(0, -0.15f, 2), new Vector3(30, 0.3f, 24), floor);
-            Box("Back Wall", root, new Vector3(0, 3, 13.85f), new Vector3(30, 6, 0.3f), wall);
-            Box("Left Wall", root, new Vector3(-14.85f, 3, 2), new Vector3(0.3f, 6, 24), wall);
-            Box("Right Wall", root, new Vector3(14.85f, 3, 2), new Vector3(0.3f, 6, 24), wall);
-            Box("Front Wall Left", root, new Vector3(-9.5f, 3, -9.85f), new Vector3(11, 6, 0.3f), wall);
-            Box("Front Wall Right", root, new Vector3(9.5f, 3, -9.85f), new Vector3(11, 6, 0.3f), wall);
-            Box("Front Header", root, new Vector3(0, 5, -9.85f), new Vector3(8, 2, 0.3f), wood);
-            for (var x = -13f; x <= 13f; x += 2f)
-                Box($"Floor Board {x}", root, new Vector3(x, 0.015f, 2), new Vector3(0.035f, 0.02f, 23.5f), wood);
+            Box("Floor", root, new Vector3(0, -0.15f, 3), new Vector3(42, 0.3f, 34), floor);
+            Box("Back Wall", root, new Vector3(0, 4, 19.85f), new Vector3(42, 8, 0.3f), wall);
+            Box("Left Wall", root, new Vector3(-20.85f, 4, 3), new Vector3(0.3f, 8, 34), wall);
+            Box("Right Wall", root, new Vector3(20.85f, 4, 3), new Vector3(0.3f, 8, 34), wall);
+            Box("Front Wall Left", root, new Vector3(-13f, 4, -13.85f), new Vector3(16, 8, 0.3f), wall);
+            Box("Front Wall Right", root, new Vector3(13f, 4, -13.85f), new Vector3(16, 8, 0.3f), wall);
+            Box("Front Header", root, new Vector3(0, 6.5f, -13.85f), new Vector3(10, 3, 0.3f), wood);
         }
 
         private static void BuildBar(Transform root, Material wood, Material brass)
         {
             var barRoot = new GameObject("Saloon Bar").transform;
             barRoot.SetParent(root);
-            Box("Counter", barRoot, new Vector3(0, 1.1f, 11.4f), new Vector3(15, 0.25f, 1.2f), wood);
-            Box("Front", barRoot, new Vector3(0, 0.5f, 11.8f), new Vector3(15, 1, 0.3f), wood);
-            for (var x = -6.5f; x <= 6.5f; x += 2.6f)
+            Box("Counter", barRoot, new Vector3(0, 1.1f, 17.4f), new Vector3(12, 0.25f, 1.2f), wood);
+            Box("Front", barRoot, new Vector3(0, 0.5f, 17.8f), new Vector3(12, 1, 0.3f), wood);
+            for (var x = -5f; x <= 5f; x += 2.5f)
             {
-                Cylinder("Bar Stool", barRoot, new Vector3(x, 0.5f, 9.9f), new Vector3(0.42f, 0.08f, 0.42f), wood);
-                Cylinder("Stool Post", barRoot, new Vector3(x, 0.25f, 9.9f), new Vector3(0.09f, 0.25f, 0.09f), brass);
+                Cylinder("Bar Stool", barRoot, new Vector3(x, 0.5f, 15.9f), new Vector3(0.42f, 0.08f, 0.42f), wood);
+                Cylinder("Stool Post", barRoot, new Vector3(x, 0.25f, 15.9f), new Vector3(0.09f, 0.25f, 0.09f), brass);
             }
         }
 
-        private static void BuildTableBays(Transform root, Material wood, Material felt, Material accent)
+        private static void BuildSingleTable(Transform root, Material wood, Material felt, Material accent)
         {
-            var positions = new[]
-            {
-                new Vector3(-8, 0, 4.5f), new Vector3(0, 0, 4.5f), new Vector3(8, 0, 4.5f),
-                new Vector3(-8, 0, -3), new Vector3(0, 0, -3), new Vector3(8, 0, -3)
-            };
             var spawnRoot = new GameObject("Table Spawn Points").transform;
             spawnRoot.SetParent(root);
-            for (var i = 0; i < positions.Length; i++)
+            var position = new Vector3(0f, 0f, 3f);
+            var bay = new GameObject("Main Game Table").transform;
+            bay.SetParent(root);
+            bay.position = position;
+            Cylinder("Table", bay, new Vector3(0, 0.82f, 0), new Vector3(2.35f, 0.12f, 2.35f), wood);
+            Cylinder("Felt", bay, new Vector3(0, 0.96f, 0), new Vector3(2.05f, 0.025f, 2.05f), felt);
+            Cylinder("Base", bay, new Vector3(0, 0.38f, 0), new Vector3(0.45f, 0.38f, 0.45f), wood);
+            for (var seat = 0; seat < 8; seat++)
             {
-                var bay = new GameObject($"Table Bay {i + 1}").transform;
-                bay.SetParent(root);
-                bay.position = positions[i];
-                Cylinder("Table", bay, new Vector3(0, 0.82f, 0), new Vector3(2.35f, 0.12f, 2.35f), wood);
-                Cylinder("Felt", bay, new Vector3(0, 0.96f, 0), new Vector3(2.05f, 0.025f, 2.05f), felt);
-                Cylinder("Base", bay, new Vector3(0, 0.38f, 0), new Vector3(0.45f, 0.38f, 0.45f), wood);
-                for (var seat = 0; seat < 8; seat++)
-                {
-                    var angle = seat * Mathf.PI * 0.25f;
-                    var p = new Vector3(Mathf.Sin(angle) * 3.15f, 0.45f, Mathf.Cos(angle) * 3.15f);
-                    Cylinder($"Seat {seat + 1}", bay, p, new Vector3(0.45f, 0.12f, 0.45f), accent);
-                }
-                var spawn = new GameObject($"Table Spawn {i + 1}").transform;
-                spawn.SetParent(spawnRoot);
-                spawn.position = positions[i];
+                var angle = seat * Mathf.PI * 0.25f;
+                var p = new Vector3(Mathf.Sin(angle) * 3.15f, 0.45f, Mathf.Cos(angle) * 3.15f);
+                Cylinder($"Seat {seat + 1}", bay, p, new Vector3(0.45f, 0.12f, 0.45f), accent);
             }
+            var spawn = new GameObject("Main Table Spawn").transform;
+            spawn.SetParent(spawnRoot);
+            spawn.position = position;
 
             var manager = Object.FindFirstObjectByType<MainLobbyManager>();
             if (manager != null)
@@ -113,16 +103,6 @@ namespace BulletBang.Editor
                     points.GetArrayElementAtIndex(i).objectReferenceValue = spawnRoot.GetChild(i);
                 serialized.ApplyModifiedPropertiesWithoutUndo();
             }
-        }
-
-        private static void BuildSpectatorRail(Transform root, Material wood, Material brass)
-        {
-            var rail = new GameObject("Spectator Rail").transform;
-            rail.SetParent(root);
-            Box("Platform", rail, new Vector3(12.5f, 0.35f, 2), new Vector3(4.2f, 0.7f, 15), wood);
-            Box("Top Rail", rail, new Vector3(10.35f, 1.25f, 2), new Vector3(0.16f, 0.16f, 15), brass);
-            for (var z = -5f; z <= 9f; z += 2f)
-                Box($"Post {z}", rail, new Vector3(10.35f, 0.75f, z), new Vector3(0.12f, 1, 0.12f), wood);
         }
 
         private static void BuildLighting(Transform root)
@@ -146,7 +126,7 @@ namespace BulletBang.Editor
             RenderSettings.ambientEquatorColor = new Color(0.18f, 0.09f, 0.045f);
             RenderSettings.ambientGroundColor = new Color(0.055f, 0.03f, 0.02f);
 
-            foreach (var position in new[] { new Vector3(-8, 4.5f, 3), new Vector3(0, 4.5f, 3), new Vector3(8, 4.5f, 3) })
+            foreach (var position in new[] { new Vector3(-9, 5.5f, 3), new Vector3(0, 5.5f, 3), new Vector3(9, 5.5f, 3) })
             {
                 var lamp = new GameObject("Warm Chandelier", typeof(Light));
                 lamp.transform.SetParent(root);
@@ -162,10 +142,10 @@ namespace BulletBang.Editor
 
         private static void BuildSpawnAndWayfinding(Transform root, Material accent)
         {
-            Box("Entrance Runner", root, new Vector3(0, 0.025f, -7), new Vector3(4.5f, 0.04f, 5), accent);
+            Box("Entrance Runner", root, new Vector3(0, 0.025f, -10), new Vector3(5f, 0.04f, 7), accent);
             var spawn = new GameObject("Lobby Player Spawn");
             spawn.transform.SetParent(root);
-            spawn.transform.SetPositionAndRotation(new Vector3(0, 0.1f, -7.5f), Quaternion.identity);
+            spawn.transform.SetPositionAndRotation(new Vector3(0, 0.1f, -11f), Quaternion.identity);
         }
 
         private static void ConfigureExistingScene(Transform environment)

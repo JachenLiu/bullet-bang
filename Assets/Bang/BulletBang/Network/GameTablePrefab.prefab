@@ -70,14 +70,8 @@ MonoBehaviour:
     _length: 0
     _data:
       Data: 00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
-  _IsGameInProgress:
-    RawValue: 0
   _CurrentPlayerCount: 0
-  _IsTableLocked:
-    RawValue: 0
   playerSeats: []
-  gameSessionPrefab:
-    RawGuidValue: ee81377030c662f4f937145060b77a78
 --- !u!1 &7652862123815907226
 GameObject:
   m_ObjectHideFlags: 0

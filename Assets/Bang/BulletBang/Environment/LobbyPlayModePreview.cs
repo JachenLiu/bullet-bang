@@ -96,20 +96,13 @@ namespace BulletBang
             var available = RuntimeMaterial(new Color(0.1f, 0.65f, 0.32f), 0.15f);
             var occupied = RuntimeMaterial(new Color(0.85f, 0.28f, 0.06f), 0.15f);
 
-            Box("Floor", root, new Vector3(0, -0.2f, 1), new Vector3(30, 0.4f, 24), floor);
-            Box("Back Wall", root, new Vector3(0, 3.5f, 13), new Vector3(30, 7, 0.35f), wall);
-            Box("Left Wall", root, new Vector3(-15, 3.5f, 1), new Vector3(0.35f, 7, 24), wall);
-            Box("Right Wall", root, new Vector3(15, 3.5f, 1), new Vector3(0.35f, 7, 24), wall);
-            Box("Bar", root, new Vector3(0, 0.85f, 11.2f), new Vector3(15, 1.7f, 1.25f), wood);
-            Box("Spectator Platform", root, new Vector3(12.5f, 0.35f, 1), new Vector3(4, 0.7f, 15), wood);
+            Box("Floor", root, new Vector3(0, -0.2f, 3), new Vector3(42, 0.4f, 34), floor);
+            Box("Back Wall", root, new Vector3(0, 4f, 20), new Vector3(42, 8, 0.35f), wall);
+            Box("Left Wall", root, new Vector3(-21, 4f, 3), new Vector3(0.35f, 8, 34), wall);
+            Box("Right Wall", root, new Vector3(21, 4f, 3), new Vector3(0.35f, 8, 34), wall);
+            Box("Simple Bar", root, new Vector3(0, 0.85f, 17.5f), new Vector3(12, 1.7f, 1.25f), wood);
 
-            var positions = new[]
-            {
-                new Vector3(-8, 0, 4.5f), new Vector3(0, 0, 4.5f), new Vector3(8, 0, 4.5f),
-                new Vector3(-8, 0, -3), new Vector3(0, 0, -3), new Vector3(8, 0, -3)
-            };
-            for (var i = 0; i < positions.Length; i++)
-                BuildTable(root, positions[i], wood, felt, i < 4 ? available : occupied, i + 1);
+            BuildTable(root, new Vector3(0f, 0f, 3f), wood, felt, available, 1);
 
             ConfigureLighting(root);
         }
