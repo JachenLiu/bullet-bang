@@ -4,7 +4,6 @@ using UnityEngine;
 using Fusion;
 using System;
 using Fusion.Sockets;
-using UnityEditor;
 using UnityEngine.SceneManagement;
 using System.Threading.Tasks;
 
@@ -29,7 +28,9 @@ namespace BulletBang
         public GameObject sessionListEntryPrefab;
         public Dictionary<string, GameObject> sessionListUIDictionary = new Dictionary<string, GameObject>();
 
-        public SceneAsset gameplayScene;
+        // Kept for compatibility with older inspector data. Matches now run at a
+        // table inside MainLobby and never transition to a gameplay scene.
+        [SerializeField, HideInInspector] private string legacyGameplaySceneName;
         private void Awake()
         {
             //if (_instance != null && _instance != this)
@@ -176,7 +177,7 @@ namespace BulletBang
         {
         }
 
-        public void OnReliableDataReceived(NetworkRunner runner, PlayerRef player, ReliableKey key, ArraySegment<byte> data)
+        public void OnReliableDataReceived(NetworkRunner runner, PlayerRef player, ReliableKey key, ReadOnlySpan<byte> data)
         {
         }
 

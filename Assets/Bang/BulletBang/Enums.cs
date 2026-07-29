@@ -17,6 +17,12 @@ namespace BulletBang
         PlayPhase,
         DiscardPhase,
     }
+    public enum PlayerViewMode
+    {
+        LobbyThirdPerson,
+        SeatedFirstPerson,
+        Spectating
+    }
     public enum CardType
     {
         Role,

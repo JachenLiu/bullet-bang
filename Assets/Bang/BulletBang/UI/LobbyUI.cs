@@ -78,12 +78,13 @@ namespace BulletBang
 
         private async void OnHostButtonClicked()
         {
-            if (string.IsNullOrEmpty(playerNameInput.text))
+            if (string.IsNullOrWhiteSpace(playerNameInput.text))
             {
                 ShowError("Please enter a player name");
                 return;
             }
 
+            LocalPlayerData.NickName = playerNameInput.text.Trim();
             ShowLoading("Creating lobby...");
             bool success = await _lobbyManager.StartLobbyHost();
             
@@ -95,12 +96,13 @@ namespace BulletBang
 
         private async void OnJoinButtonClicked()
         {
-            if (string.IsNullOrEmpty(playerNameInput.text))
+            if (string.IsNullOrWhiteSpace(playerNameInput.text))
             {
                 ShowError("Please enter a player name");
                 return;
             }
 
+            LocalPlayerData.NickName = playerNameInput.text.Trim();
             ShowLoading("Joining lobby...");
             bool success = await _lobbyManager.JoinLobby();
             

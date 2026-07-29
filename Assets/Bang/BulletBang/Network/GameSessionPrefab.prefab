@@ -46,11 +46,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SortKey: 4268526129
-  ObjectInterest: 1
-  Flags: 262145
+  SendPriority: 1
+  EnableInterpolation: 1
+  Flags: 262146
   NestedObjects: []
   NetworkedBehaviours:
   - {fileID: 8741323996148221847}
+  ForceRemoteRenderTimeframe: 0
 --- !u!114 &8741323996148221847
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -66,7 +68,7 @@ MonoBehaviour:
   playerPrefab:
     RawGuidValue: f7291312aa2b38643bc36c89c9e53b15
   _IsGameStarted:
-    _value: 0
+    RawValue: 0
   _CurrentTurnIndex: 0
   _IsSetupPhase:
-    _value: 0
+    RawValue: 0

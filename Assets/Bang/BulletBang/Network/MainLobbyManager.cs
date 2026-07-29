@@ -4,19 +4,23 @@ using UnityEngine;
 using Fusion;
 using System;
 using Fusion.Sockets;
-using UnityEditor;
 using UnityEngine.SceneManagement;
 using System.Threading.Tasks;
+using System.Threading;
 
 namespace BulletBang
 {
+    /// <summary>
+    /// Owns the shared social-lobby Fusion session. Match rules belong to the
+    /// authoritative GameSession spawned by a table; this class should only manage
+    /// presence, lobby avatars, and table discovery.
+    /// </summary>
     public class MainLobbyManager : MonoBehaviour, INetworkRunnerCallbacks
     {
         public static MainLobbyManager Instance { get; private set; }
 
         [Header("Network Settings")]
         [SerializeField] private NetworkRunner networkRunnerPrefab;
-        [SerializeField] private NetworkSceneManagerDefault sceneManagerPrefab;
 
         [Header("Player Prefabs")]
         [SerializeField] private NetworkObject lobbyPlayerPrefab;
@@ -28,6 +32,7 @@ namespace BulletBang
         private NetworkRunner _runner;
         private Dictionary<PlayerRef, NetworkObject> _spawnedCharacters = new Dictionary<PlayerRef, NetworkObject>();
         private List<NetworkObject> _gameTables = new List<NetworkObject>();
+        private bool _isShuttingDown;
 
         public event Action<NetworkRunner> OnLobbyStarted;
         public event Action<NetworkRunner> OnLobbyJoined;
@@ -49,16 +54,23 @@ namespace BulletBang
         public async Task<bool> StartLobbyHost()
         {
             if (_runner != null) return false;
+            if (networkRunnerPrefab == null)
+            {
+                Debug.LogError("Network runner prefab is not assigned.");
+                return false;
+            }
 
             _runner = Instantiate(networkRunnerPrefab);
+            var startingRunner = _runner;
             _runner.name = "Network runner";
+            ConfigureRunner(_runner);
 
             var startGameArgs = new StartGameArgs()
             {
                 GameMode = GameMode.Host,
                 SessionName = "MainLobby",
                 Scene = SceneRef.FromIndex(SceneManager.GetActiveScene().buildIndex),
-                SceneManager = Instantiate(sceneManagerPrefab),
+                SceneManager = GetSceneManager(_runner),
                 PlayerCount = 32 // Maximum players in the lobby
             };
 
@@ -67,6 +79,8 @@ namespace BulletBang
             if (!result.Ok)
             {
                 Debug.LogError($"Failed to start game: {result.ShutdownReason}");
+                if (startingRunner != null) Destroy(startingRunner.gameObject);
+                _runner = null;
                 return false;
             }
 
@@ -77,23 +91,46 @@ namespace BulletBang
         public async Task<bool> JoinLobby()
         {
             if (_runner != null) return false;
+            if (networkRunnerPrefab == null)
+            {
+                Debug.LogError("Network runner prefab is not assigned.");
+                return false;
+            }
 
             _runner = Instantiate(networkRunnerPrefab);
+            var startingRunner = _runner;
             _runner.name = "Network runner";
+            ConfigureRunner(_runner);
 
+            // A client-only join must fail promptly when no host exists. Without
+            // this cancellation token Photon can leave the menu looking stuck
+            // while its normal cloud/network timeout elapses.
+            using var joinTimeout = new CancellationTokenSource(TimeSpan.FromSeconds(10));
             var startGameArgs = new StartGameArgs()
             {
                 GameMode = GameMode.Client,
                 SessionName = "MainLobby",
                 Scene = SceneRef.FromIndex(SceneManager.GetActiveScene().buildIndex),
-                SceneManager = Instantiate(sceneManagerPrefab)
+                SceneManager = GetSceneManager(_runner),
+                StartGameCancellationToken = joinTimeout.Token
             };
 
-            var result = await _runner.StartGame(startGameArgs);
+            StartGameResult result;
+            try
+            {
+                result = await _runner.StartGame(startGameArgs);
+            }
+            catch (OperationCanceledException)
+            {
+                Debug.LogWarning("No hosted saloon was found before the join timeout.");
+                await CleanupFailedRunner(startingRunner);
+                return false;
+            }
 
             if (!result.Ok)
             {
                 Debug.LogError($"Failed to join lobby: {result.ShutdownReason}");
+                await CleanupFailedRunner(startingRunner);
                 return false;
             }
 
@@ -101,23 +138,55 @@ namespace BulletBang
             return true;
         }
 
-        public void LeaveLobby()
+        private async Task CleanupFailedRunner(NetworkRunner failedRunner)
         {
-            if (_runner != null)
-            {
-                _runner.Shutdown();
+            if (failedRunner != null && failedRunner.IsRunning)
+                await failedRunner.Shutdown();
+            if (failedRunner != null)
+                Destroy(failedRunner.gameObject);
+            if (_runner == failedRunner)
                 _runner = null;
-                OnLobbyLeft?.Invoke();
+            _isShuttingDown = false;
+        }
+
+        public async void LeaveLobby()
+        {
+            if (_runner != null && !_isShuttingDown)
+            {
+                _isShuttingDown = true;
+                var runner = _runner;
+                _runner = null;
+                await runner.Shutdown();
+                if (runner != null) Destroy(runner.gameObject);
             }
         }
 
         private void SpawnGameTables()
         {
             if (_runner == null || !_runner.IsServer) return;
+            LobbyPlayModePreview.EnsureEnvironment();
 
-            for (int i = 0; i < tableSpawnPoints.Length; i++)
+            if (gameTablePrefab == null)
             {
-                var table = _runner.Spawn(gameTablePrefab, tableSpawnPoints[i].position, tableSpawnPoints[i].rotation);
+                Debug.LogError("MainLobbyManager requires a GameTable network prefab.");
+                return;
+            }
+
+            var defaultPositions = new[]
+            {
+                new Vector3(-8, 0, 4.5f), new Vector3(0, 0, 4.5f), new Vector3(8, 0, 4.5f),
+                new Vector3(-8, 0, -3), new Vector3(0, 0, -3), new Vector3(8, 0, -3)
+            };
+            var count = tableSpawnPoints != null && tableSpawnPoints.Length > 0
+                ? tableSpawnPoints.Length : defaultPositions.Length;
+            for (int i = 0; i < count; i++)
+            {
+                var position = tableSpawnPoints != null && tableSpawnPoints.Length > 0
+                    ? tableSpawnPoints[i].position : defaultPositions[i];
+                var rotation = tableSpawnPoints != null && tableSpawnPoints.Length > 0
+                    ? tableSpawnPoints[i].rotation : Quaternion.identity;
+                var table = _runner.Spawn(gameTablePrefab, position, rotation);
+                table.transform.SetPositionAndRotation(position, rotation);
                 _gameTables.Add(table);
             }
         }
@@ -126,9 +195,20 @@ namespace BulletBang
         {
             if (runner.IsServer)
             {
+                if (lobbyPlayerPrefab == null)
+                {
+                    Debug.LogError("MainLobbyManager requires a LobbyPlayer network prefab.");
+                    return;
+                }
                 // Spawn the player character in the lobby
-                Vector3 spawnPosition = new Vector3(UnityEngine.Random.Range(-5f, 5f), 0, UnityEngine.Random.Range(-5f, 5f));
+                // CharacterController capsules use their transform as the base in
+                // this prefab, so keep them above the saloon floor on spawn.
+                Vector3 spawnPosition = new Vector3(
+                    UnityEngine.Random.Range(-4f, 4f), 1.05f,
+                    UnityEngine.Random.Range(-8f, -5f));
                 NetworkObject networkPlayerObject = runner.Spawn(lobbyPlayerPrefab, spawnPosition, Quaternion.identity, player);
+                networkPlayerObject.transform.SetPositionAndRotation(spawnPosition, Quaternion.identity);
+                runner.SetPlayerObject(player, networkPlayerObject);
                 _spawnedCharacters.Add(player, networkPlayerObject);
 
                 // If this is the first player (host), spawn the game tables
@@ -141,6 +221,11 @@ namespace BulletBang
 
         public void OnPlayerLeft(NetworkRunner runner, PlayerRef player)
         {
+            foreach (var tableObject in _gameTables)
+            {
+                if (tableObject != null)
+                    tableObject.GetComponent<GameTable>()?.ServerHandleDisconnected(player);
+            }
             if (_spawnedCharacters.TryGetValue(player, out NetworkObject networkObject))
             {
                 runner.Despawn(networkObject);
@@ -162,10 +247,17 @@ namespace BulletBang
         public void OnCustomAuthenticationResponse(NetworkRunner runner, Dictionary<string, object> data) { }
         public void OnDisconnectedFromServer(NetworkRunner runner, NetDisconnectReason reason)
         {
-            LeaveLobby();
+            _runner = null;
         }
         public void OnHostMigration(NetworkRunner runner, HostMigrationToken hostMigrationToken) { }
-        public void OnInput(NetworkRunner runner, NetworkInput input) { }
+        public void OnInput(NetworkRunner runner, NetworkInput input)
+        {
+            input.Set(new NetworkInputData
+            {
+                MovementInput = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")),
+                RotationInput = Input.GetAxis("Mouse X")
+            });
+        }
         public void OnInputMissing(NetworkRunner runner, PlayerRef player, NetworkInput input) { }
         public void OnObjectEnterAOI(NetworkRunner runner, NetworkObject obj, PlayerRef player) { }
         public void OnObjectExitAOI(NetworkRunner runner, NetworkObject obj, PlayerRef player) { }
@@ -173,7 +265,7 @@ namespace BulletBang
         {
         }
 
-        public void OnReliableDataReceived(NetworkRunner runner, PlayerRef player, ReliableKey key, ArraySegment<byte> data)
+        public void OnReliableDataReceived(NetworkRunner runner, PlayerRef player, ReliableKey key, ReadOnlySpan<byte> data)
         {
         }
         public void OnSceneLoadDone(NetworkRunner runner) { }
@@ -186,8 +278,22 @@ namespace BulletBang
             _gameTables.Clear();
             
             // Notify that we've left the lobby
+            _runner = null;
+            _isShuttingDown = false;
             OnLobbyLeft?.Invoke();
         }
         public void OnUserSimulationMessage(NetworkRunner runner, SimulationMessagePtr message) { }
+
+        private void ConfigureRunner(NetworkRunner runner)
+        {
+            runner.ProvideInput = true;
+            runner.AddCallbacks(this);
+        }
+
+        private static NetworkSceneManagerDefault GetSceneManager(NetworkRunner runner)
+        {
+            var manager = runner.GetComponent<NetworkSceneManagerDefault>();
+            return manager != null ? manager : runner.gameObject.AddComponent<NetworkSceneManagerDefault>();
+        }
     }
 } 

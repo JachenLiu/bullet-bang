@@ -27,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 5000156544867288870}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 652.06, y: 331.6596, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -47,11 +47,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SortKey: 2320635175
-  ObjectInterest: 1
-  Flags: 262145
+  SendPriority: 1
+  EnableInterpolation: 1
+  Flags: 262146
   NestedObjects: []
   NetworkedBehaviours:
   - {fileID: 8920005955080284009}
+  ForceRemoteRenderTimeframe: 0
 --- !u!114 &8920005955080284009
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -69,10 +71,10 @@ MonoBehaviour:
     _data:
       Data: 00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
   _IsGameInProgress:
-    _value: 0
+    RawValue: 0
   _CurrentPlayerCount: 0
   _IsTableLocked:
-    _value: 0
+    RawValue: 0
   playerSeats: []
   gameSessionPrefab:
     RawGuidValue: ee81377030c662f4f937145060b77a78
@@ -135,6 +137,9 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:

@@ -46,6 +46,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cardPrefab: {fileID: 2025407294326412100, guid: e605a93b49decf94397ffd4313c73ca8, type: 3}
+  deckInstance: {fileID: 0}
 --- !u!114 &733969719138993587
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -59,8 +60,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SortKey: 2389852504
-  ObjectInterest: 1
-  Flags: 262145
+  SendPriority: 1
+  EnableInterpolation: 1
+  Flags: 262146
   NestedObjects: []
   NetworkedBehaviours:
   - {fileID: 8618260237888730171}
+  ForceRemoteRenderTimeframe: 0

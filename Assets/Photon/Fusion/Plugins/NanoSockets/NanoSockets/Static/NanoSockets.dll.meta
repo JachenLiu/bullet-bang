@@ -22,7 +22,9 @@ PluginImporter:
         Exclude OSXUniversal: 1
         Exclude PS4: 0
         Exclude PS5: 0
+        Exclude Ounce: 0
         Exclude Switch: 0
+        Exclude VisionOS: 0
         Exclude WebGL: 1
         Exclude Win: 1
         Exclude Win64: 1
@@ -34,6 +36,7 @@ PluginImporter:
     second:
       enabled: 0
       settings:
+        AndroidSharedLibraryType: Executable
         CPU: ARMv7
   - first:
       Any: 
@@ -48,6 +51,11 @@ PluginImporter:
         CPU: AnyCPU
         DefaultValueInitialized: true
         OS: AnyOS
+  - first:
+      Nintendo Switch: Ounce
+    second:
+      enabled: 1
+      settings: {}
   - first:
       Nintendo Switch: Switch
     second:
@@ -87,6 +95,15 @@ PluginImporter:
       enabled: 0
       settings:
         CPU: None
+  - first:
+      VisionOS: VisionOS
+    second:
+      enabled: 1
+      settings:
+        AddToEmbeddedBinaries: false
+        CPU: ARM64
+        CompileFlags: 
+        FrameworkDependencies: 
   - first:
       Windows Store Apps: WindowsStoreApps
     second:
